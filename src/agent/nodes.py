@@ -93,35 +93,6 @@ async def search_secondary_node(state: AgentState) -> Dict[str, Any]:
         "raw_results": raw_results
     }
 
-
-async def aggregate_results_node1(state: AgentState) -> Dict[str, Any]:
-    """Filter and rank results based on relevance"""
-    raw_results = state.get("raw_results", {})
-    filtered_results = {}
-    confidence_scores = {}
-
-    for system, results in raw_results.items():
-        logger.info(f"Processing {system}: {len(results)} raw results")
-        filtered = []
-        for result in results[:5]:
-            score = calculate_relevance_score(result, state["intent"].refined_query)
-            logger.info(f"Score for '{result['display']}': {score}")
-            if score > 0.3:
-                result["relevance_score"] = score
-                filtered.append(result)
-        logger.info(f"{system}: {len(filtered)} results after filtering")
-        if filtered:
-            filtered_results[system] = sorted(filtered, key=lambda x: x["relevance_score"], reverse=True)
-            confidence_scores[system] = max([r["relevance_score"] for r in filtered])
-        else:
-            confidence_scores[system] = 0.0
-    logger.info(f"Final filtered_results: {list(filtered_results.keys())}")
-    return {
-        "filtered_results": filtered_results,
-        "confidence_scores": confidence_scores
-    }
-
-
 def aggregate_results_node(state: AgentState) -> Dict[str, Any]:
     raw_results = state.get("raw_results", {})
     filtered_results = {}
@@ -182,22 +153,3 @@ async def _search_system(system: CodingSystem, query: str, limit: int) -> List[D
         logger.error(f"Search failed for {system}: {e}")
         return []
 
-
-def calculate_relevance_score(result: Dict, query: str) -> float:
-    """Calculate relevance score based on string matching"""
-    query_lower = query.lower()
-    text = f"{result.get('display', '')} {result.get('code', '')}".lower()
-
-    if query_lower in text:
-        return 1.0
-
-    query_words = set(query_lower.split())
-    text_words = set(text.split())
-
-    if not query_words:
-        return 0.0
-
-    intersection = query_words.intersection(text_words)
-    union = query_words.union(text_words)
-
-    return len(intersection) / len(union) if union else 0.0

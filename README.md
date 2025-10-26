@@ -1,6 +1,6 @@
 # Clinical Code Finder
 
-n intelligent agent that finds medical codes across multiple coding systems using LangGraph and OpenAI and Ollama
+An intelligent agent that finds medical codes across multiple coding systems using LangGraph and OpenAI and Ollama
 
 ## Overview
 
@@ -24,7 +24,7 @@ This application uses LLMs and graph-based agents to intelligently search medica
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/clinical-codes-finder.git
+git clone https://github.com/duraik25/clinical-codes-finder.git
 cd clinical_code_finder
 ```
 
@@ -181,9 +181,6 @@ If you see "unexpected keyword argument 'proxies'", ensure you're using:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
-[Your License]
 
 ## Acknowledgments
 
