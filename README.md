@@ -14,6 +14,16 @@ This application uses LLMs and graph-based agents to intelligently search medica
 - 📊 Confidence scoring and result ranking
 - 🚀 Support for both Ollama and OpenAI models
 
+## Agent Workflow high level Overview
+
+User Query → Intent Classifier → Target System Selection → Code Search → Relevance Scoring →  Memory-Aware Response
+
+- Natural language queries are classified to identify the right coding system (ICD-10, LOINC, RxNorm, etc.)
+- The agent searches APIs with refined queries and ranks results by relevance
+- Conversation history is used to resolve follow-ups like "what's the test for it?"
+- Results are summarized with confidence scores and system labels
+
+
 ## Installation
 
 ### Prerequisites
