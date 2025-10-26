@@ -40,27 +40,3 @@ class ResultSummarizer:
 
         return response.content if hasattr(response, 'content') else str(response)
 
-    async def summarize1(
-            self,
-            query: str,
-            results: Dict[str, List[Dict]],
-            intent: Any,
-            confidence_scores: Dict[str, float]
-    ) -> str:
-        results_summary = []
-        for system, items in results.items():
-            if items:
-                results_summary.append(f"{system}: {len(items)} codes found")
-                for item in items[:2]:
-                    results_summary.append(f"- {item['code']}: {item['display']}")
-
-        results_text = "\n".join(results_summary) if results_summary else "No codes found"
-
-        chain = self.prompt | self.llm
-        response = await chain.ainvoke({
-            "query": query,
-            "intent_type": intent.concept_type,
-            "results_summary": results_text
-        })
-
-        return response.content if hasattr(response, 'content') else str(response)
