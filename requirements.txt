@@ -1,0 +1,43 @@
+# Core dependencies
+#langchain==1.0.2
+#langgraph==1.0.1
+#langchain-openai==1.0.1
+#openai==2.6.1
+
+#langchain==0.2.16
+#langgraph==0.2.34
+#langchain-openai==0.1.25
+#openai==1.52.0
+
+#langchain==0.2.16
+#langgraph==0.2.34
+#langchain-openai==0.1.25
+#langchain-community==0.2.17
+#openai==1.52.0
+
+# Core dependencies
+langchain==1.0.2
+langgraph==1.0.1
+langchain-openai==1.0.1
+langchain-community==0.4
+openai==2.6.1
+
+
+# Web framework
+streamlit==1.32.0
+
+# Async HTTP
+aiohttp==3.9.3
+
+# Environment and config
+python-dotenv==1.0.1
+
+# Data handling
+pydantic==2.7.4
+
+# Community integrations (for Ollama)
+#langchain-community==0.0.34
+
+# Logging
+loguru==0.7.2
+
